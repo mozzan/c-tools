@@ -6,9 +6,16 @@ syntax on
 map <f9> :Tlist<CR>
 set tags=./tags;
 autocmd BufWritePre * :%s/\s\+$//e
-:set tabstop=4
-:set shiftwidth=4
-:set expandtab
+
+let _curfile = expand("%:t")
+if _curfile =~ "Makefile" || _curfile =~ "makefile" || _curfile =~ ".*\.mk"
+set noexpandtab
+else
+set expandtab
+set tabstop=4
+set shiftwidth=4
+endif
+
 :set background=dark
 "show file path
 map f :echo @%<CR>
@@ -27,7 +34,7 @@ nmap <C-c> :cs find c <C-R>=expand("<cword>")<CR><CR>
 "nmap <C-t> :cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <C-e> :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-v> :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-i> :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-i> :cs find i <C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR>
 "nmap <C-r> :cs reset<CR>
 " nnoremap <C-]> :tabnew %<CR>g<C-]>
