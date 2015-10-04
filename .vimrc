@@ -4,6 +4,7 @@ set backspace=2
 set autoindent
 syntax on
 map <f9> :Tlist<CR>
+nnoremap <silent> <F6> :NERDTree<CR>
 set tags=./tags;
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -38,6 +39,12 @@ nmap <C-i> :cs find i <C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR>
 "nmap <C-r> :cs reset<CR>
 " nnoremap <C-]> :tabnew %<CR>g<C-]>
+
+" NerdTree
+autocmd BufWinEnter * NERDTreeMirror
+au VimEnter *  NERDTree
+autocmd VimEnter * NERDTree | wincmd p
+
 
 nnoremap 1 1gt
 nnoremap 2 2gt
