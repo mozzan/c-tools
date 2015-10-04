@@ -3,8 +3,11 @@ set nocompatible
 set backspace=2
 set autoindent
 syntax on
+
+" TagList
 map <f9> :Tlist<CR>
-nnoremap <silent> <F6> :NERDTree<CR>
+let Tlist_Use_Right_Window = 1
+
 set tags=./tags;
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -16,6 +19,19 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 endif
+
+" focus current line
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+" split navigation
+map <C-k> <C-W>j
+map <C-i> <C-W>k
+map <C-j> <C-W>h
+map <C-l> <C-W>l
 
 :set background=dark
 "show file path
@@ -35,7 +51,7 @@ nmap <C-c> :cs find c <C-R>=expand("<cword>")<CR><CR>
 "nmap <C-t> :cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <C-e> :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-v> :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-i> :cs find i <C-R>=expand("<cfile>")<CR>$<CR>
+"nmap <C-i> :cs find i <C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR>
 "nmap <C-r> :cs reset<CR>
 " nnoremap <C-]> :tabnew %<CR>g<C-]>
@@ -44,6 +60,7 @@ nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR>
 autocmd BufWinEnter * NERDTreeMirror
 au VimEnter *  NERDTree
 autocmd VimEnter * NERDTree | wincmd p
+nnoremap <silent> <F6> :NERDTree<CR>
 
 
 nnoremap 1 1gt
